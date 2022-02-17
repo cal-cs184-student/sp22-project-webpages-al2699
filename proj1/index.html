@@ -1,7 +1,203 @@
-<html>
-	<head>
-	</head>
-	<body>
-		Project 1 here
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>
+  body {
+    padding: 100px;
+    width: 1000px;
+    margin: auto;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    color: #121212;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+</style>
+<title>CS 184 Rasterizer</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+</head>
+
+
+<body>
+
+<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2022</h1>
+<h1 align="middle">Project 1: Rasterizer</h1>
+<h2 align="middle">Alan Hernandez, p1-rasterizer-sp22-temporal-pincer-movement</h2>
+
+<br><br>
+
+<div>
+
+<h2 align="middle">Overview</h2>
+<p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the project.</p>
+
+<h2 align="middle">Section I: Rasterization</h2>
+
+<h3 align="middle">Part 1: Rasterizing single-color triangles</h3>
+
+<h4 align="middle"><strong>Walk through how you rasterize triangles in your own words.</strong>
+</p></h4>
+<p>We rasterized our triangles by first defining a bounding box around a given triangle by taking the max of all x coordinates and y coordinates of the triangle's vertices and then taking the min of all x and y coordinates of the same vertices. Next, we loop'd through every coorindate in that bounding box and checked to see if that coordinate was in the triangle by performing the 3-line test on it. If a given sample was within the triangle bounds (again, according to the 3-line test) then we would make a call to fill_pixel() to fill in that pixel.</p>
+
+<h4 align="middle"><strong>Explain how your algorithm is no worse than one that checks each sample within the bounding box of the triangle.</strong>
+</p></h4>
+<p>Our algorithm is no worse than one that checks each sample within the bounding box of the triangle because that is exactly the algorithm we implemented. First we find the bounding box of the triangle and then sample each pixel in that bounding box. </p>
+
+<h4 align="middle"><strong>Show a png screenshot of basic/test4.svg with the default viewing parameters and with the pixel inspector centered on an interesting part of the scene.</strong>
+
+<div align="middle">
+  <table style="width=100%">
+    <tr>
+      <td>
+        <img src="images/svg4interesting.png" align="middle" width="400px"/>
+        <figcaption align="middle">test4.svg with the default viewing parameters and pixel inspector centered over a declining slope
+        of a triangle's vertex.</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<h3 align="middle">Part 2: Antialiasing triangles</h3>
+<h4 align="middle"><strong>Walk through your supersampling algorithm and data structures. Why is supersampling useful? What modifications did you make to the rasterization pipeline in the process? Explain how you used supersampling to antialias your triangles.</strong>
+</p></h4>
+<p>We supersampled by using a sample_buffer who's size was sizeof(frame_buffer)*sample_rate. This way, our image (while represented in the sample_buffer coordinates) had an appropriate resolution to supersample with. Once the frame_buffer was resized, we proceeded (in rasterize_triangle()) to iterate through the image in sample_buffer coordinates in sqrt(sample_rate) blocks. For each block, we'd run the 3-line test to check if the supersample coordinate was inside the triangle and call fill in the supersample pixel at that coordinate. Finally, in resolve_to_framebuffer(), we iterated through the sample_buffer and averaged all supersampled pixels in local regions and then mapped said averages back to frame_buffer coordinates to push to the frame_buffer.
+
+Supersampling is useful because it removes high-frequency items from an image (which helps aliasing problems) by softening the transitions between pixel intensities through bluring/averaging. 
+</p>
+
+<h4 align="middle"><strong>Show png screenshots of basic/test4.svg with the default viewing parameters and sample rates 1, 4, and 16 to compare them side-by-side. Position the pixel inspector over an area that showcases the effect dramatically; for example, a very skinny triangle corner. Explain why these results are observed.</strong>
+
+<div align="middle">
+  <table style="width=100%">
+    <tr>
+      <td>
+        <img src="images/sample_rate_1.png" align="middle" width="400px"/>
+        <figcaption align="middle">basic/test4.svg with sample rate 1</figcaption>
+      </td>
+      <td>
+        <img src="images/sample_rate_4.png" align="middle" width="400px"/>
+        <figcaption align="middle">basic/test4.svg with sample rate 4</figcaption>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="images/sample_rate_16.png" align="middle" width="400px"/>
+        <figcaption align="middle">basic/test4.svg with sample rate 16</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<h3 align="middle">Part 3: Transforms</h3>
+<h4 align="middle"><strong>Create an updated version of svg/transforms/robot.svg with cubeman doing something more interesting, like waving or running. Feel free to change his colors or proportions to suit your creativity. Save your svg file as my_robot.svg in your docs/ directory and show a png screenshot of your rendered drawing in your write-up. Explain what you were trying to do with cubeman in words.
+.</strong>
+</p></h4>
+
+<div align="middle">
+  <table style="width=100%">
+    <tr>
+      <td>
+        <img src="images/my_robot_render.png" align="middle" width="400px"/>
+        <figcaption align="middle">transform/robot.svg modified to dab</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+<p>We were trying to make robot.svg dab and hold a phone in his hand. We accomplished the dab by using a rotate transformation on an arm and coloring an object in the other hand.
+</p>
+
+<h2 align="middle">Section II: Sampling</h2>
+
+<h3 align="middle">Part 4: Barycentric coordinates</h3>
+<h4 align="middle"><strong>Explain barycentric coordinates in your own words and use an image to aid you in your explanation. One idea is to use a svg file that plots a single triangle with one red, one green, and one blue vertex, which should produce a smoothly blended color triangle.
+.</strong>
+</p></h4>
+
+<div align="middle">
+  <table style="width=100%">
+    <tr>
+      <td>
+        <img src="images/interpolated_triangle.svg" align="middle" width="400px"/>
+        <figcaption align="middle">triangle with 3 vertices and interpolated colors (source: Alec's Web Log)</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<p>Barycentric coordinates are a way to linearize the interpolation of something over some area. Those interpolation values could be values of color, intensity, or texture. For example the triangle above has a green, blue, and red vertex and all values inbetween them are interpolated color values.
+</p>
+
+<h4 align="middle"><strong>Show a png screenshot of svg/basic/test7.svg with default viewing parameters and sample rate 1. If you make any additional images with color gradients, include them.
+.</strong>
+</p></h4>
+
+<div align="middle">
+  <table style="width=100%">
+    <tr>
+      <td>
+        <img src="images/test7.png" align="middle" width="400px"/>
+        <figcaption align="middle">test7.svg</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h3 align="middle">Part 5: "Pixel sampling" for texture mapping</h3>
+
+<h4 align="middle"><strong>Explain pixel sampling in your own words and describe how you implemented it to perform texture mapping. Briefly discuss the two different pixel sampling methods, nearest and bilinear.
+</strong>
+</p></h4>
+
+<p>Pixel sampling the practice of sampling pixel within a given area to see if it's within the shape's space. We implemented it by sampling a triangle's texture at specific location in order to determine what texture would be added next. Nearst texture mapping would sample the nearest pixel and bilinear would sample the nearest 4 pixels to determine the next texture.
+</p>
+
+<h4 align="middle"><strong>Check out the svg files in the svg/texmap/ directory. Use the pixel inspector to find a good example of where bilinear sampling clearly defeats nearest sampling. Show and compare four png screenshots using nearest sampling at 1 sample per pixel, nearest sampling at 16 samples per pixel, bilinear sampling at 1 sample per pixel, and bilinear sampling at 16 samples per pixel.
+</strong>
+</p></h4>
+
+<div align="middle">
+  <table style="width=100%">
+    <tr>
+      <td>
+        <img src="images/nearest_one.png" align="middle" width="400px"/>
+        <figcaption align="middle">nearest, 1 pixel sampling</figcaption>
+      </td>
+      <td>
+        <img src="images/bilinear_one.png" align="middle" width="400px"/>
+        <figcaption align="middle">bilinear, 1 pixel sampling</figcaption>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="images/nearest_sixteen.png" align="middle" width="400px"/>
+        <figcaption align="middle">nearest, 16 pixel sampling</figcaption>
+      </td>
+      <td>
+        <img src="images/bilinear_sixteen.png" align="middle" width="400px"/>
+        <figcaption align="middle">bilinear, 16 pixel sampling</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h4 align="middle"><strong>Comment on the relative differences. Discuss when there will be a large difference between the two methods and why.
+</strong>
+</p></h4>
+
+
+<h3 align="middle">Part 6: "Level sampling" with mipmaps for texture mapping</h3>
+
+
+
+<h2 align="middle">Section III: Art Competition</h2>
+<p>If you are not participating in the optional art competition, don't worry about this section!</p>
+
+<h3 align="middle">Part 7: Draw something interesting!</h3>
+
+</body>
 </html>
