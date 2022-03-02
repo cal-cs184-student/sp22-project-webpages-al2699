@@ -195,9 +195,71 @@ Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation.
     <h3 align="middle">Part 5: Half-edge split</h3>
 
 
+
+
+
+
+<h4 align="middle"><strong>Briefly explain how you implemented the edge split operation and describe any interesting implementation / debugging tricks you have used.</strong>
+
+<p>We implemented the edge split operation by carefully iterating through the mesh and re-arranging pointers to allow for our new 2 edges to replace our previous singular edge. We didn't use any special debugging tricks other than printf-ing everytime our program crashed.</p>
+
+<h4 align="middle"><strong>Show screenshots of a mesh before and after some edge splits.</strong>
+
+<p>See figures 14-15.</p>
+
+<h4 align="middle"><strong>Show screenshots of a mesh before and after a combination of both edge splits and edge flips.</strong>
+
+<p>See figure 16.</p>
+
+<h4 align="middle"><strong>Write about your eventful debugging journey, if you have experienced one.</strong>
+
+<p>We didn't have much of an eventful debugging journey.</p>
+
+<h4 align="middle"><strong>If you have implemented support for boundary edges, show screenshots of your implementation properly handling split operations on boundary edges.</strong>
+
+<p>We did not implement split operations on the boundary edges.</p>
+
+
+    <div align="middle">
+      <table style="width=100%">
+        <tr>
+          <td>
+            <img src="images/teapot_no_split.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.14: teapot.dae with no edges split</figcaption>
+          </td>
+          <td>
+            <img src="images/teapot_with_split.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.15: teapot.dae with some edges split</figcaption>
+          </td>
+        </tr>
+        <br>
+      </table>
+    </div>
+
+
     <h3 align="middle">Part 6: Loop subdivision for mesh upsampling</h3>
 
 
+
+
+
+
+
+<h4 align="middle"><strong>Briefly explain how you implemented the loop subdivision and describe any interesting implementation / debugging tricks you have used.</strong>
+
+<p>ENTER</p>
+
+<h4 align="middle"><strong>Take some notes, as well as some screenshots, of your observations on how meshes behave after loop subdivision. What happens to sharp corners and edges? Can you reduce this effect by pre-splitting some edges?</strong>
+
+<p>ENTER</p>
+
+<h4 align="middle"><strong>Load dae/cube.dae. Perform several iterations of loop subdivision on the cube. Notice that the cube becomes slightly asymmetric after repeated subdivisions. Can you pre-process the cube with edge flips and splits so that the cube subdivides symmetrically? Document these effects and explain why they occur. Also explain how your pre-processing helps alleviate the effects.</strong>
+
+<p>ENTER</p>
+
+<h4 align="middle"><strong>If you have implemented any extra credit extensions, explain what you did and document how they work with screenshots.</strong>
+
+<p>We did not implement any extra credit extensions.</p>
 
     <h2 align="middle">Section III: Optional Extra Credit</h2>
     <p>If you are not participating in the optional mesh competition, don't worry about this section!</p>
