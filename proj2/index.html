@@ -31,7 +31,7 @@
 
   <h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2022</h1>
   <h1 align="middle">Project 2: Mesh Editor</h1>
-  <h2 align="middle">Alan Hernandez and ..., CS184-??</h2>
+  <h2 align="middle">Alan Hernandez and Medhaav Chandra Mahesh p2-meshedit-sp22-temporal-pincer-movements</h2>
 
   <br><br>
 
@@ -121,16 +121,77 @@ Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation.
 
 <h4 align="middle"><strong>Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation</strong>
 
-<p>INSERT STUFF</p>
+<p>See figure 9.</p>
+
+    <div align="middle">
+      <table style="width=100%">
+        <tr>
+            <img src="images/task2writeup.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.9: Screenshot of bez/teapot.bez (not .dae) evaluated by our implamentation of Bezier Surfaces</figcaption>
+        </tr>
+        <br>
+      </table>
+    </div>
 
     <h2 align="middle">Section II: Sampling</h2>
 
     <h3 align="middle">Part 3: Average normals for half-edge meshes</h3>
 
+<h4 align="middle"><strong>Briefly explain how you implemented the area-weighted vertex normals.</strong>
+
+<p>We implemented the area-weighted vertex nomals by iterating through the given faces and then using the formula from lecture to find the normals.</p>
+
+<h4 align="middle"><strong>Show screenshots of dae/teapot.dae (not .bez) comparing teapot shading with and without vertex normals. Use Q to toggle default flat shading and Phong shading.</strong>
+
+<p>See figures 10 and 11.</p>
+
+    <div align="middle">
+      <table style="width=100%">
+        <tr>
+          <td>
+            <img src="images/flat_shading.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.10: teapot.dae with flat shading</figcaption>
+          </td>
+          <td>
+            <img src="images/phong_shading.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.11: teapot.dae with Phong shading</figcaption>
+          </td>
+        </tr>
+      </table>
+    </div>
 
     <h3 align="middle">Part 4: Half-edge flip</h3>
 
 
+
+<h4 align="middle"><strong>Briefly explain how you implemented the edge flip operation and describe any interesting implementation / debugging tricks you have used.</strong>
+
+<p>We implemented the edge flip operation by iterating through the mesh very carefully and reassigning pointers very meticulously. We didn't really use any unique debugging tricks. We just used print statements whenever the program would crash to detect what line it was crashing at.</p>
+
+
+<h4 align="middle"><strong>Show screenshots of the teapot before and after some edge flips.</strong>
+
+<p>See figure 12-13.</p>
+
+
+<h4 align="middle"><strong>Write about your eventful debugging journey, if you have experienced one.</strong>
+
+<p>We experienced no debugging journey &#128526;</p>
+
+    <div align="middle">
+      <table style="width=100%">
+        <tr>
+          <td>
+            <img src="images/teapot_edge_preflip.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.12: teapot.dae with an edge selected</figcaption>
+          </td>
+          <td>
+            <img src="images/teapot_edge_postflip.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.13: teapot.dae with selected edge flipped</figcaption>
+          </td>
+        </tr>
+      </table>
+    </div>
     <h3 align="middle">Part 5: Half-edge split</h3>
 
 
@@ -144,6 +205,4 @@ Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation.
     <h3 align="middle">Part 7: Design your own mesh!</h3>
 
 </body>
-
->>>>>>> Stashed changes
 </html>
