@@ -31,7 +31,7 @@
 
   <h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2022</h1>
   <h1 align="middle">Project 2: Mesh Editor</h1>
-  <h2 align="middle">Alan Hernandez and Medhaav Chandra Mahesh p2-meshedit-sp22-temporal-pincer-movements</h2>
+  <h2 align="middle">Alan Hernandez and Medhaav Chandra Mahesh Link: https://cal-cs184-student.github.io/sp22-project-webpages-al2699/proj2/index.html</h2>
 
   <br><br>
 
@@ -252,19 +252,44 @@ Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation.
 
 <h4 align="middle"><strong>Briefly explain how you implemented the loop subdivision and describe any interesting implementation / debugging tricks you have used.</strong>
 
-<p>ENTER</p>
+<p>We implemented the loop subdivision algorithm as advised in the spec and comments: by first calculating new positions for both old and new vertices and storing them in newPosition memeber variables of verticies and edges. Next we subdivided the mesh and flipped new edges which we're incident on one new and one old vertex. Finally, we updated the positions of all vertices.</p>
 
 <h4 align="middle"><strong>Take some notes, as well as some screenshots, of your observations on how meshes behave after loop subdivision. What happens to sharp corners and edges? Can you reduce this effect by pre-splitting some edges?</strong>
 
-<p>ENTER</p>
+<p>Meshes seem to become much more finer and less blockier as loop subdivison takes effect (see fig. 17 & 18). However, if upsampling goes too far, it can create aliasing effects on some meshes (see fig. 19). Sharp corners seem to suffer from some sort of aliasing or moire effects as upsampling takes place (see fig. 19). This effect could potentially be effected by pre-splitting some edges in specific ways so as to fit the sampling rate of the corners/edges a little better.</p>
 
 <h4 align="middle"><strong>Load dae/cube.dae. Perform several iterations of loop subdivision on the cube. Notice that the cube becomes slightly asymmetric after repeated subdivisions. Can you pre-process the cube with edge flips and splits so that the cube subdivides symmetrically? Document these effects and explain why they occur. Also explain how your pre-processing helps alleviate the effects.</strong>
 
-<p>ENTER</p>
+<p>Yes you can. Part of running loop divison/upsampling correctly on a mesh is finding intelligent places to apply said techniques. Intelligently pre-processing several areas prior to upsampling would help the cube stay symmetric after repeated subdivsions.</p>
 
 <h4 align="middle"><strong>If you have implemented any extra credit extensions, explain what you did and document how they work with screenshots.</strong>
 
 <p>We did not implement any extra credit extensions.</p>
+
+    <div align="middle">
+      <table style="width=100%">
+        <tr>
+          <td>
+            <img src="images/teapot_no_upsampling.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.17: teapot.dae with no upsampling/loop division whatsoever</figcaption>
+          </td>
+          <td>
+            <img src="images/teapot_upsample_once.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.18: teapot.dae upsampled once</figcaption>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="images/teapot_upsample_twice.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.19: teapot.dae upsampled twice</figcaption>
+          </td>
+          <td>
+            <img src="images/cube_upsample_several.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.20: cube.dae upsampled several times</figcaption>
+          </td>
+        </tr>
+      </table>
+    </div>
 
     <h2 align="middle">Section III: Optional Extra Credit</h2>
     <p>If you are not participating in the optional mesh competition, don't worry about this section!</p>
