@@ -1,7 +1,149 @@
-<html>
-	<head>
-	</head>
-	<body>
-		Project 2 here
-	</body>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <style>
+    body {
+      padding: 100px;
+      width: 1000px;
+      margin: auto;
+      text-align: left;
+      font-weight: 300;
+      font-family: 'Open Sans', sans-serif;
+      color: #121212;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+  </style>
+  <title>CS 184 Mesh Editor</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+</head>
+
+
+<body>
+
+  <h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2022</h1>
+  <h1 align="middle">Project 2: Mesh Editor</h1>
+  <h2 align="middle">Alan Hernandez and ..., CS184-??</h2>
+
+  <br><br>
+
+  <div>
+
+    <h2 align="middle">Overview</h2>
+    <p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole.
+      Share your thoughts on what interesting things you've learned from completing the project.</p>
+
+    <h2 align="middle">Section I: Bezier Curves and Surfaces</h2>
+
+    <h3 align="middle">Part 1: Bezier curves with 1D de Casteljau subdivision</h3>
+
+<h4 align="middle"><strong>Briefly explain de Casteljau's algorithm and how you implemented it in order to evaluate Bezier curves.</strong>
+</p></h4>
+<p>De Casteljau's algorithm involves interpolating a point between some point p_i and p_{i+1} for i=0...(k-1) when we have k control points. This algorithm is run recursivley until only one point remains and that point will be a point on the Bezier curve with the initial k control points. This was implemented through a series of helper functions such as evaluateStep() which would simply evaluate one step of the recursive de Casteljau's algorithm and evaluate1D() which would evaluate the Bezier curve at some point t given k control points.</p>
+
+<h4 align="middle"><strong>Take a look at the provided .bzc files and create your own Bezier curve with 6 control points of your choosing. Use this Bezier curve for your screenshots below.</strong>
+
+<p>See figure 1.</p>
+
+<h4 align="middle"><strong>Show screenshots of each step / level of the evaluation from the original control points down to the final evaluated point. Press E to step through. Toggle C to show the completed Bezier curve as well.</strong>
+
+<p>See figure 2-7.</p>
+
+<h4 align="middle"><strong>Show a screenshot of a slightly different Bezier curve by moving the original control points around and modifying the parameter tt via mouse scrolling.</strong>
+
+<p>See figure 8.</p>
+
+
+    <div align="middle">
+      <table style="width=100%">
+        <tr>
+          <td>
+            <img src="images/casteljau1.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.1: Bezier Curve with 6 control points</figcaption>
+          </td>
+          <td>
+            <img src="images/casteljau2.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.2: Bezier Curve after step 1 of de Casteljau's algorithm</figcaption>
+          </td>
+        </tr>
+        <br>
+        <tr>
+          <td>
+            <img src="images/casteljau3.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.3: Bezier Curve after step 2 of de Casteljau's algorithm</figcaption>
+          </td>
+          <td>
+            <img src="images/casteljau4.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.4: Bezier Curve after step 3 of de Casteljau's algorithm</figcaption>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="images/casteljau5.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.5: Bezier Curve after step 4 of de Casteljau's algorithm</figcaption>
+          </td>
+          <td>
+            <img src="images/casteljau6.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.6: Bezier Curve after step 5 of de Casteljau's algorithm</figcaption>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="images/bezier6.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.7: Bezier Curve after step 5 of de Casteljau's algorithm with superimposed fitting bezier curve.</figcaption>
+          </td>
+          <td>
+            <img src="images/slightlydifferentbezier6.png" align="middle" width="400px" />
+            <figcaption align="middle">Fig.8: Bezier Curve with 6 control points after step 5 of de Casteljau's algorithm with one control point (last one on right) moved slightly and t paramter changed slightly</figcaption>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+
+    <h3 align="middle">Part 2: Bezier surfaces with separable 1D de Casteljau subdivision</h3>
+
+<!--Briefly explain how de Casteljau algorithm extends to Bezier surfaces and how you implemented it in order to evaluate Bezier surfaces.
+Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation.-->
+
+<h4 align="middle"><strong>Briefly explain how de Casteljau algorithm extends to Bezier surfaces and how you implemented it in order to evaluate Bezier surfaces.</strong>
+
+<p>De Casteljau's algorithm extends very well/easily to Bezier surfaces by simply performing 1d de casteljau's algorithm to each row of a bezier curve's rows in the control matrix.</p>
+
+<h4 align="middle"><strong>Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation</strong>
+
+<p>INSERT STUFF</p>
+
+    <h2 align="middle">Section II: Sampling</h2>
+
+    <h3 align="middle">Part 3: Average normals for half-edge meshes</h3>
+
+
+    <h3 align="middle">Part 4: Half-edge flip</h3>
+
+
+    <h3 align="middle">Part 5: Half-edge split</h3>
+
+
+    <h3 align="middle">Part 6: Loop subdivision for mesh upsampling</h3>
+
+
+
+    <h2 align="middle">Section III: Optional Extra Credit</h2>
+    <p>If you are not participating in the optional mesh competition, don't worry about this section!</p>
+
+    <h3 align="middle">Part 7: Design your own mesh!</h3>
+
+</body>
+
+>>>>>>> Stashed changes
 </html>
